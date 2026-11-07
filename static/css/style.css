@@ -1,0 +1,4 @@
+/* Негізгі стильдер. Акцент түстері тек тәуекел санаттарына арналады. */
+.badge-safe { background: #198754; }
+.badge-suspicious { background: #ffc107; color: #000; }
+.badge-fraud { background: #dc3545; }

@@ -1,0 +1,30 @@
+# Виртуалды орта және құпиялар
+.venv/
+venv/
+.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Django
+db.sqlite3
+logs/*.log*
+staticfiles/
+
+# Ноутбук
+.ipynb_checkpoints/
+
+# Үлкен деректер (қайта жүктеуге болады)
+data/raw/*.zip
+data/raw/SMSSpamCollection
+data/raw/PhiUSIIL_Phishing_URL_Dataset.csv
+data/raw/malicious_phish.csv
+data/processed/*.parquet
+
+# IDE
+.vscode/
+.idea/
