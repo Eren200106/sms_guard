@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}SMS тексеру{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">SMS мәтінін тексеру</h1>
+
+<form method="post" class="card shadow-sm mb-4">
+  {% csrf_token %}
+  <div class="card-body">
+    <label for="text" class="form-label">SMS мәтіні:</label>
+    <textarea id="text" name="text" rows="5" class="form-control mb-3"
+              placeholder="Мысалы: Сіз 500 000 ₸ ұтып алдыңыз! Алу үшін сілтемеге өтіңіз...">{{ text|default:"" }}</textarea>
+    <button type="submit" class="btn btn-primary">Тексеру</button>
+  </div>
+</form>
+
+{% if result %}
+<div class="alert {% if result.label == 'spam' %}alert-danger{% else %}alert-success{% endif %} shadow-sm">
+  <h4 class="alert-heading">
+    {% if result.label == "spam" %}🚨 Бұл — фишинг/спам хабарлама{% else %}✅ Қауіпсіз хабарлама{% endif %}
+  </h4>
+  <p class="mb-1">Сенімділік: <b>{{ result.probability|floatformat:1 }}%</b></p>
+  {% if result.reasons %}
+    <hr>
+    <p class="mb-1"><b>Неге бұлай шешілді:</b></p>
+    <ul class="mb-0">
+      {% for r in result.reasons %}<li>{{ r }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Дашборд{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Дашборд</h1>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <div class="display-6 fw-bold text-primary">{{ stats.total }}</div>
+        <div class="text-muted">Барлық тексеру</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <div class="display-6 fw-bold text-danger">{{ stats.spam }}</div>
+        <div class="text-muted">Спам</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <div class="display-6 fw-bold text-success">{{ stats.ham }}</div>
+        <div class="text-muted">Қауіпсіз</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <div class="display-6 fw-bold">{{ stats.accuracy|floatformat:1 }}%</div>
+        <div class="text-muted">Дәлдік</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Соңғы тексерулер</h3>
+<div class="table-responsive">
+  <table class="table table-hover bg-white shadow-sm">
+    <thead>
+      <tr>
+        <th>Уақыт</th><th>Түрі</th><th>Кіріс</th><th>Нәтиже</th><th>%</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in recent %}
+      <tr>
+        <td>{{ r.created_at|date:"d.m.Y H:i" }}</td>
+        <td>{{ r.kind }}</td>
+        <td class="text-truncate" style="max-width: 320px;">{{ r.input|truncatechars:60 }}</td>
+        <td class="{% if r.label == 'spam' or r.label == 'phishing' %}text-danger{% else %}text-success{% endif %}">{{ r.label }}</td>
+        <td>{{ r.probability|floatformat:1 }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5" class="text-center text-muted">Әзірге тексеру жоқ.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

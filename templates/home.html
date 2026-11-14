@@ -1,6 +1,40 @@
 {% extends "base.html" %}
+{% block title %}SMS Guard — басты{% endblock %}
+
 {% block content %}
-<h1 class="h3">SMS Guard</h1>
-<p class="lead">Защита от SMS-мошенничества. Проект запущен; функции появятся в следующих заданиях.</p>
-<p><a href="/api/v1/health/">Проверить /api/v1/health/</a></p>
+<div class="p-5 bg-white rounded-3 shadow-sm mb-4">
+  <h1 class="display-6 fw-bold">СМС пен сілтемелерді <span class="text-primary">фишингтен</span> қорғаңыз</h1>
+  <p class="lead text-muted">
+    Machine Learning негізіндегі жылдам тексеру — 1 секундтан аз уақытта жауап.
+  </p>
+  <a href="/sms/" class="btn btn-primary btn-lg me-2">SMS тексеру</a>
+  <a href="/url/" class="btn btn-outline-primary btn-lg">URL тексеру</a>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">⚡ Жылдам</h5>
+        <p class="card-text text-muted">Орташа жауап уақыты &lt; 100 мс.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🎯 Дәл</h5>
+        <p class="card-text text-muted">SMS пен URL үшін бөлек ML модельдер.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🇰🇿 Қазақша</h5>
+        <p class="card-text text-muted">Қазақ және орыс тіліндегі SMS-ке бейімделген.</p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

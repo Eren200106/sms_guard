@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}URL тексеру{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Сілтемені тексеру</h1>
+
+<form method="post" class="card shadow-sm mb-4">
+  {% csrf_token %}
+  <div class="card-body">
+    <label for="url" class="form-label">URL:</label>
+    <input type="url" id="url" name="url" required class="form-control mb-3"
+           placeholder="https://example.kz/login" value="{{ url|default:'' }}">
+    <button type="submit" class="btn btn-primary">Тексеру</button>
+  </div>
+</form>
+
+{% if result %}
+<div class="alert {% if result.label == 'phishing' %}alert-danger{% else %}alert-success{% endif %} shadow-sm">
+  <h4 class="alert-heading">
+    {% if result.label == "phishing" %}🚨 Бұл — фишингтік сілтеме{% else %}✅ Сілтеме қауіпсіз{% endif %}
+  </h4>
+  <p class="mb-1">Сенімділік: <b>{{ result.probability|floatformat:1 }}%</b></p>
+  {% if result.features %}
+    <hr>
+    <p class="mb-1"><b>Белгілер:</b></p>
+    <ul class="mb-0">
+      {% for k, v in result.features.items %}<li>{{ k }}: {{ v }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}
